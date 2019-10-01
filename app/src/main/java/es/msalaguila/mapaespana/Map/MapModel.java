@@ -105,7 +105,7 @@ public class MapModel implements MapContract.Model {
     Cuadrado c1 = new Cuadrado(363,690,892,1055);
     ArrayList<Cuadrado> cuads = new ArrayList<>();
     cuads.add(c1);
-    ComunidadAutonoma comunidad = new ComunidadAutonoma(cuads, "Andalucía", R.raw.himno_de_andalucia_letra);
+    ComunidadAutonoma comunidad = new ComunidadAutonoma(cuads, "Andalucía", R.raw.andalucia);
     comunidadAutonomas.add(comunidad);
   }
 
@@ -126,7 +126,7 @@ public class MapModel implements MapContract.Model {
     cuads.add(c1);
     cuads.add(c2);
     ComunidadAutonoma comunidad = new ComunidadAutonoma(cuads, "Madrid"
-            ,R.raw.himno_de_la_comunidad_de_madrid_letra_himno_regional_espanol);
+            ,R.raw.madrid);
     comunidadAutonomas.add(comunidad);
   }
 
@@ -220,7 +220,8 @@ public class MapModel implements MapContract.Model {
     Cuadrado c1 = new Cuadrado(844,1074,708,865);
     ArrayList<Cuadrado> cuads = new ArrayList<>();
     cuads.add(c1);
-    ComunidadAutonoma comunidad = new ComunidadAutonoma(cuads, "Islas Baleares",0);
+    ComunidadAutonoma
+            comunidad = new ComunidadAutonoma(cuads, "Islas Baleares",0);
     comunidadAutonomas.add(comunidad);
   }
 
