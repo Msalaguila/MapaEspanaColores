@@ -125,7 +125,8 @@ public class MapModel implements MapContract.Model {
     ArrayList<Cuadrado> cuads = new ArrayList<>();
     cuads.add(c1);
     cuads.add(c2);
-    ComunidadAutonoma comunidad = new ComunidadAutonoma(cuads, "Madrid",0);
+    ComunidadAutonoma comunidad = new ComunidadAutonoma(cuads, "Madrid"
+            ,R.raw.himno_de_la_comunidad_de_madrid_letra_himno_regional_espanol);
     comunidadAutonomas.add(comunidad);
   }
 
