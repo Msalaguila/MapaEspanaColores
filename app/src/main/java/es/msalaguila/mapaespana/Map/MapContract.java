@@ -11,7 +11,7 @@ interface MapContract {
 
     void displayData(MapViewModel viewModel);
 
-    void displayCity(MapViewModel viewModel);
+    void displayCityWithColor(MapViewModel viewModel);
   }
 
   interface Presenter {
@@ -23,13 +23,13 @@ interface MapContract {
 
     void fetchData();
 
-    void touchCoordinates(int x, int y);
+    void touchedColor(int color);
   }
 
   interface Model {
     String fetchData();
 
-    ComunidadAutonoma getCityCoordinates(int x, int y);
+    ComunidadAutonoma getCityColor(int color);
   }
 
   interface Router {

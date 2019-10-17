@@ -58,10 +58,10 @@ public class MapPresenter implements MapContract.Presenter {
   }
 
   @Override
-  public void touchCoordinates(int x, int y) {
-    ComunidadAutonoma comunidadAutonoma = model.getCityCoordinates(x, y);
+  public void touchedColor(int color) {
+    ComunidadAutonoma comunidadAutonoma = model.getCityColor(color);
     viewModel.comunidadAutonoma = comunidadAutonoma;
-    view.get().displayCity(viewModel);
+    view.get().displayCityWithColor(viewModel);
   }
 
 

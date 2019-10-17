@@ -11,6 +11,6 @@
         android:id="@+id/fondo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/mapa_espana_comunidades_original" />
+        android:src="@drawable/mapacolores" />
 
 </android.support.constraint.ConstraintLayout>

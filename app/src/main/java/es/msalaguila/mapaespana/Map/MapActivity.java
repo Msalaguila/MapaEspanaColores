@@ -1,5 +1,10 @@
 package es.msalaguila.mapaespana.Map;
 
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,17 +36,33 @@ public class MapActivity
     fondoPantalla = findViewById(R.id.fondo);
     fondoPantalla.setOnTouchListener(new View.OnTouchListener() {
       @Override
-      public boolean onTouch(View v, MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN){
+      public boolean onTouch(View view, MotionEvent event) {
+        Drawable imgDrawable = ((ImageView) view).getDrawable();
+        //imgDrawable will not be null if you had set src to ImageView, in case of background drawable it will be null
+        Bitmap bitmap = ((BitmapDrawable) imgDrawable).getBitmap();
 
-          int x = (int) event.getX();
-          int y = (int) event.getY();
+        Matrix inverse = new Matrix();
+        ((ImageView) view).getImageMatrix().invert(inverse);
+        float[] touchPoint = new float[]{event.getX(), event.getY()};
+        inverse.mapPoints(touchPoint);
+        int xCoord = (int) touchPoint[0];
+        int yCoord = (int) touchPoint[1];
 
-          String text = "X: " + String.valueOf(event.getX()) + " Y: " + String.valueOf(event.getY());
-          Log.d("Coordinates", text);
-          presenter.touchCoordinates(x,y);
+        if ((yCoord >= 0) && (yCoord < bitmap.getHeight())) {
+          int touchedRGB = bitmap.getPixel(xCoord, yCoord);
+
+          //then do what you want with the pixel data, e.g
+          int redValue = Color.red(touchedRGB);
+          int greenValue = Color.green(touchedRGB);
+          int blueValue = Color.blue(touchedRGB);
+          int alphaValue = Color.alpha(touchedRGB);
+
+          int colorValue = Color.argb(alphaValue, redValue, greenValue, blueValue);
+          Log.i("TouchedColor", "ColorValue ARGB: " + colorValue);
+
+          presenter.touchedColor(colorValue);
         }
-        return true;
+        return false;
       }
     });
   }
@@ -67,8 +88,7 @@ public class MapActivity
   }
 
   @Override
-  public void displayCity(MapViewModel viewModel) {
-
+  public void displayCityWithColor(MapViewModel viewModel) {
     String nombreComunidad = viewModel.comunidadAutonoma.getNombreComunidad();
     int himnoURI = viewModel.comunidadAutonoma.getHimnoURI();
     Log.d("Himno URI", String.valueOf(himnoURI));
@@ -88,9 +108,10 @@ public class MapActivity
         mediaPlayer.start();
       }
     } else {
-      mediaPlayer.release();
-      mediaPlayer = null;
+      if (mediaPlayer != null) {
+        mediaPlayer.release();
+        mediaPlayer = null;
+      }
     }
-
   }
 }
